@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ saludo }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <h2 class= "fw-bold text-center my-5">{{ saludo }}</h2>
+
+    <div class="container my-3">
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-4">
+                <h2 class="fw-bold text-center my-2">Añade un Autor</h2>
+                <form action='/procesar_autor' method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nombre_autor_id" class="form-label">Nombre</label>
+                        <input type="text" placeholder='Nombre Autor' class="form-control" id="nombre_autor_id" name="nombre_autor">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="apellido_autor_id" class="form-label">Apellido</label>
+                        <input type="text" placeholder='Apellido' class="form-control" id="apellido_autor_id" name="apellido_autor">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="notas_autor_id" class="form-label">Notas</label>
+                        <textarea class="form-control" id="notas_autor_id" rows="2" name="notas_autor"></textarea>
+                        
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Añade autor</button>
+                </form>
+            </div>
+
+            <div class="col-sm-12 col-lg-4 mx-auto border border-primary listado">
+                <h2 class="fw-bold text-center my-2">Autores actuales:</h2>
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Ver</th>
+                    </tr>
+                        
+                    {% for p in pub%}
+                    <tr>
+                        <td>{{p.id}}</td>
+                        <td>{{p.nombre}} {{p.apellido}}</td>
+                        <td><span class="badge rounded-pill bg-info text-dark"><a href='/ver_autor/{{p.id}}'>Ver info</a></span> </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <a href="/" class="btn btn-primary" role="button" data-bs-toggle="button">Ir a libros</a>
+        
+      </div>
+
+    <script src="{% static 'core/js/index.js' %}"></script>
+
+</body>
+</html>
+
+
+
+            
+
+
+
+
+

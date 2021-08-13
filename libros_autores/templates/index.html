@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ saludo }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <h2 class="fw-bold text-center my-5">{{ saludo }}</h2>
+
+    <div class="container my-3">
+        
+        <div class="row">
+            <div class="col-sm-12 col-lg-4">
+                <h2 class="fw-bold text-center my-2">Añade un Libro</h2>
+                <form action='/procesar_libro' method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="titulo_libro_id" class="form-label">Titulo</label>
+                        <input type="text" placeholder='Titulo Libro' class="form-control" id="titulo_libro_id"
+                            name="titulo_libro">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="desc_libro" class="form-label">Descripcion</label>
+                        <input type="text" placeholder='Descripcion' class="form-control" id="desc_libro"
+                            name="descripcion_libro">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Añade Libro</button>
+                </form>
+            </div>
+
+            <div class="col-sm-12 col-lg-4 mx-auto border border-primary">
+                
+                <h2 class="fw-bold text-center my-2">Libros actuales:</h2>
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>ID</th>
+                        <th>Titulo</th>
+                        <th>Ver</th>
+                    </tr>
+
+                    {% for b in book%}
+                    <tr>
+                        <td>{{b.id}}</td>
+                        <td>{{b.titulo}}</td>
+                        <td><span class="badge rounded-pill bg-info text-dark"><a href="/ver_libro/{{b.id}}">Ver info</a></span>  </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 col-lg-3 mx-auto">
+        <a href="/autores" class="btn btn-primary" role="button" data-bs-toggle="button">Ir a autores</a>
+        
+      </div>
+    <script src="{% static 'core/js/index.js' %}"></script>
+
+</body>
+
+</html>
