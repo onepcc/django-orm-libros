@@ -45,8 +45,8 @@
 
 
                         <label for="autor_libro-id" class="form-labelt"></label>
-                        <Select class="form-select" id="autor_libro-id" name="id_autor_libro">
-                            <option selected>Selecciona un autor</option>
+                        <Select class="form-select" id="autor_libro-id" name="id_autor_libro" required>
+                            <option selected value=''>Selecciona un autor</option>
                             {% for autor in todos_autores%}
                             {% if not autor in autores_libro%}
                             <option value="{{autor.id}}">{{autor.nombre}} {{autor.apellido}}</option>

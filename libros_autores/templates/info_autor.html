@@ -44,8 +44,8 @@
                                 value='{{info_autor.id}}'>
                         
                         <label for="libro_autor-id" class="form-labelt"></label>
-                        <Select class="form-select" id="libro_autor-id" name="id_libro_autor">
-                            <option selected>Selecciona un libro</option>
+                        <Select class="form-select" id="libro_autor-id" name="id_libro_autor" required>
+                            <option selected value=''>Selecciona un libro</option>
                             {% for libro in todos_libros%}
                                 {% if not libro in libros_autor%}
                                 <option value="{{libro.id}}">{{libro.titulo}}</option>
